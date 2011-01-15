@@ -246,15 +246,6 @@ function contact_form_shortcode( $atts, $content ) {
 		$r .= "</ul>\n</div>\n\n";
 	}
 	
-	$r .= "\n<style>\n";
-	$r .= "\t\t input[type='text'] { width: 300px; }\n";
-	$r .= "\t\t input { margin-bottom: 0 !important; font-size: 12px !important; font-family: 'Lucida Grande',Verdana,Arial,'Bitstream Vera Sans',sans-serif; }\n";
-	$r .= "\t\t textarea { height: 200px; width: 400px; }\n";
-	$r .= "\t\t input[type='radio'] { float: left; }\n";
-	$r .= "\t\t label { margin-bottom: 3px; }\n";
-	$r .= "\t\t input{type='checkbox'] { display: inline-block; }\n";
-	$r .= "\t\t\n";
-	$r .= "\n</style>\n";
 	$r .= "<form action='#contact-form-$id' method='post' class='contact-form commentsblock'>\n";
 	$r .= '<div style="line-height: 1em;">';
 	$r .= $body;
