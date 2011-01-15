@@ -1,12 +1,12 @@
 <?php
 
 /*
-Plugin Name: Grunion Contact Form
+Plugin Name: False Grunion Contact Form
 Description: Add a contact form to any post, page or text widget.  Emails will be sent to the post's author by default, or any email address you choose.  As seen on WordPress.com.
 Plugin URI: http://automattic.com/#
-AUthor: Automattic, Inc.
+Author: Automattic, Inc.
 Author URI: http://automattic.com/
-Version: 2.0
+Version: 1.0
 */
 
 define( 'GRUNION_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
@@ -65,33 +65,33 @@ function contact_form_render_field( $field ) {
 	}
 
 	if ( $field['type'] == 'email' ) {
-		$r .= "\n<div style='margin-bottom: 5px;'>\n";
-		$r .= "\t\t<label style='font-weight: bold; display: block;' for='".esc_attr($field_id)."' class='grunion-field-label ".esc_attr($field['type']) . ( contact_form_is_error($field_id) ? ' form-error' : '' ) . "'>" . htmlspecialchars( $field['label'] ) . ( $field['required'] ? '<span style="color: #AAA; margin-left: 4px; font-weight: normal;">'. __("(required)") . '</span>' : '' ) . "</label>\n";
+		$r .= "\n<div>\n";
+		$r .= "\t\t<label for='".esc_attr($field_id)."' class='grunion-field-label ".esc_attr($field['type']) . ( contact_form_is_error($field_id) ? ' form-error' : '' ) . "'>" . htmlspecialchars( $field['label'] ) . ( $field['required'] ? '<span>'. __("(required)") . '</span>' : '' ) . "</label>\n";
 		$r .= "\t\t<input type='text' name='".esc_attr($field_id)."' id='".esc_attr($field_id)."' value='".esc_attr($field_value)."' class='".esc_attr($field['type'])."'/>\n";
 		$r .= "\t</div>\n";
 	} elseif ( $field['type'] == 'textarea' ) {
-		$r .= "\n<div style='margin-bottom: 5px;'>\n";
-		$r .= "\t\t<label style='font-weight: bold; display: block;' for='".esc_attr($field_id)."' class='".esc_attr($field['type']) . ( contact_form_is_error($field_id) ? ' form-error' : '' ) . "'>" . htmlspecialchars( $field['label'] ) . ( $field['required'] ? '<span style="color: #AAA; margin-left: 4px; font-weight: normal;">'. __("(required)") . '</span>' : '' ) . "</label>\n";
+		$r .= "\n<div>\n";
+		$r .= "\t\t<label for='".esc_attr($field_id)."' class='".esc_attr($field['type']) . ( contact_form_is_error($field_id) ? ' form-error' : '' ) . "'>" . htmlspecialchars( $field['label'] ) . ( $field['required'] ? '<span>'. __("(required)") . '</span>' : '' ) . "</label>\n";
 		$r .= "\t\t<textarea name='".esc_attr($field_id)."' id='contact-form-comment-".esc_attr($field_id)."' rows='20'>".htmlspecialchars($field_value)."</textarea>\n";
 		$r .= "\t</div>\n";
 	} elseif ( $field['type'] == 'radio' ) {
-		$r .= "\t<div><label style='font-weight: bold; display: block;' class='".esc_attr($field['type']) . ( contact_form_is_error($field_id) ? ' form-error' : '' ) . "'>" . htmlspecialchars( $field['label'] ) . ( $field['required'] ? '<span style="color: #AAA; margin-left: 4px; font-weight: normal;">'. __("(required)") . '</span>' : '' ) . "</label>\n";
+		$r .= "\t<div><label class='".esc_attr($field['type']) . ( contact_form_is_error($field_id) ? ' form-error' : '' ) . "'>" . htmlspecialchars( $field['label'] ) . ( $field['required'] ? '<span>'. __("(required)") . '</span>' : '' ) . "</label>\n";
 		foreach ( $field['options'] as $option ) {
 			$r .= "\t\t<input type='radio' name='".esc_attr($field_id)."' value='".esc_attr($option)."' class='".esc_attr($field['type'])."' ".( $option == $field_value ? "checked='checked' " : "")." />\n";
- 			$r .= "\t\t<label style='float: left; margin-left: 8px;' class='".esc_attr($field['type']) . ( contact_form_is_error($field_id) ? ' form-error' : '' ) . "'>". htmlspecialchars( $option ) . "</label>\n";
-			$r .= "\t\t<div style='clear: both;'></div>\n";
+ 			$r .= "\t\t<label class='".esc_attr($field['type']) . ( contact_form_is_error($field_id) ? ' form-error' : '' ) . "'>". htmlspecialchars( $option ) . "</label>\n";
+			$r .= "\t\t<div></div>\n";
 		}
 		$r .= "\t\t</div>\n";
 	} elseif ( $field['type'] == 'checkbox' ) {
-		$r .= "\t<div style='margin-bottom: 5px;'>\n";
+		$r .= "\t<div>\n";
 		$r .= "\t\t<input type='checkbox' name='".esc_attr($field_id)."' value='".__('Yes')."' class='".esc_attr($field['type'])."' ".( $field_value ? "checked='checked' " : "")." />\n";
-		$r .= "\t\t<label style='font-weight: bold;' class='".esc_attr($field['type']) . ( contact_form_is_error($field_id) ? ' form-error' : '' ) . "'>\n";
-		$r .= "\t\t". htmlspecialchars( $field['label'] ) . ( $field['required'] ? '<span style="color: #AAA; margin-left: 4px; font-weight: normal;">'. __("(required)") . '</span>' : '' ) . "</label>\n";
+		$r .= "\t\t<label class='".esc_attr($field['type']) . ( contact_form_is_error($field_id) ? ' form-error' : '' ) . "'>\n";
+		$r .= "\t\t". htmlspecialchars( $field['label'] ) . ( $field['required'] ? '<span>'. __("(required)") . '</span>' : '' ) . "</label>\n";
 		$r .= "\t</div>\n";
 	} elseif ( $field['type'] == 'select' ) {
-		$r .= "\n<div style='margin-bottom: 5px;'>\n";
-		$r .= "\t\t<label style='font-weight: bold; display: block;' for='".esc_attr($field_id)."' class='".esc_attr($field['type']) . ( contact_form_is_error($field_id) ? ' form-error' : '' ) . "'>" . htmlspecialchars( $field['label'] ) . ( $field['required'] ? '<span style="color: #AAA; margin-left: 4px; font-weight: normal;">'. __("(required)") . '</span>' : '' ) . "</label>\n";
-		$r .= "\t<select name='".esc_attr($field_id)."' style='margin-bottom: 0 !important;' id='".esc_attr($field_id)."' value='".esc_attr($field_value)."' class='".esc_attr($field['type'])."'/>\n";
+		$r .= "\n<div>\n";
+		$r .= "\t\t<label for='".esc_attr($field_id)."' class='".esc_attr($field['type']) . ( contact_form_is_error($field_id) ? ' form-error' : '' ) . "'>" . htmlspecialchars( $field['label'] ) . ( $field['required'] ? '<span>'. __("(required)") . '</span>' : '' ) . "</label>\n";
+		$r .= "\t<select name='".esc_attr($field_id)."' id='".esc_attr($field_id)."' value='".esc_attr($field_value)."' class='".esc_attr($field['type'])."'/>\n";
 		foreach ( $field['options'] as $option ) {
 			$r .= "\t\t<option".( $option == $field_value ? " selected='selected'" : "").">". htmlspecialchars($option)."</option>\n";
 		}
@@ -101,8 +101,8 @@ function contact_form_render_field( $field ) {
 		// default: text field
 		// note that any unknown types will produce a text input, so we can use arbitrary type names to handle
 		// input fields like name, email, url that require special validation or handling at POST
-		$r .= "\n<div style='margin-bottom: 5px;'>\n";
-		$r .= "\t\t<label style='font-weight: bold; display: block;' for='".esc_attr($field_id)."' class='".esc_attr($field['type']) . ( contact_form_is_error($field_id) ? ' form-error' : '' ) . "'>" . htmlspecialchars( $field['label'] ) . ( $field['required'] ? '<span style="color: #AAA; margin-left: 4px; font-weight: normal;">'. __("(required)") . '</span>' : '' ) . "</label>\n";
+		$r .= "\n<div>\n";
+		$r .= "\t\t<label for='".esc_attr($field_id)."' class='".esc_attr($field['type']) . ( contact_form_is_error($field_id) ? ' form-error' : '' ) . "'>" . htmlspecialchars( $field['label'] ) . ( $field['required'] ? '<span>'. __("(required)") . '</span>' : '' ) . "</label>\n";
 		$r .= "\t\t<input type='text' name='".esc_attr($field_id)."' id='".esc_attr($field_id)."' value='".esc_attr($field_value)."' class='".esc_attr($field['type'])."'/>\n";
 		$r .= "\t</div>\n";
 	}
@@ -242,12 +242,12 @@ function contact_form_shortcode( $atts, $content ) {
 	if ( is_wp_error( $contact_form_errors ) && $errors = (array) $contact_form_errors->get_error_codes() ) {
 		$r .= "<div class='form-error'>\n<h3>" . __( 'Error!' ) . "</h3>\n<ul class='form-errors'>\n";
 		foreach ( $contact_form_errors->get_error_messages() as $message )
-			$r .= "\t<li class='form-error-message' style='color: red;'>$message</li>\n";
+			$r .= "\t<li class='form-error-message'>$message</li>\n";
 		$r .= "</ul>\n</div>\n\n";
 	}
 	
 	$r .= "<form action='#contact-form-$id' method='post' class='contact-form commentsblock'>\n";
-	$r .= '<div style="line-height: 1em;">';
+	$r .= '<div>';
 	$r .= $body;
 	$r .= "\t<p class='contact-submit'>\n";
 	$r .= "\t\t<input type='submit' value='" . __( "Submit &#187;" ) . "' class='pushbutton-wide'/>\n";
@@ -292,7 +292,7 @@ function contact_form_shortcode( $atts, $content ) {
 	if ( is_wp_error( $contact_form_errors ) && $errors = (array) $contact_form_errors->get_error_codes() ) :
 		$r .= "<div class='form-error'>\n<h3>" . __( 'Error!' ) . "</h3>\n<p>\n";
 		foreach ( $contact_form_errors->get_error_messages() as $message )
-			$r .= "\t$message<br />\n";
+			$r .= "\t$message\n";
 		$r .= "</p>\n</div>\n\n";
 	else :
 		$r .= "<h3>" . __( 'Message Sent' ) . "</h3>\n\n";
